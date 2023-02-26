@@ -18,6 +18,8 @@ public final class CustomJoinMessages extends JavaPlugin {
 
         Metrics metrics = new Metrics(this, 17818);
 
+        metrics.addCustomChart(new Metrics.SimplePie("chart_id", () -> "My value"));
+
         fileConfiguration.addDefault("SendJoinMessage", true);
         fileConfiguration.addDefault("CustomJoinMessage", "&8[&6+&8] &7%player% joined! &8(%playercount%)");
         fileConfiguration.addDefault("SendQuitMessage", true);
