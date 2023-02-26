@@ -2,7 +2,7 @@ name: CustomJoinMessages
 version: '${project.version}'
 main: de.chiiicken.customjoinmessages.CustomJoinMessages
 api-version: 1.19
-load: STARTUP
+load: POSTWORLD
 authors: [ chiiicken ]
 description: A simple plugin that allows you to customize your servers join and leave messages.
 website: chiiicken.de
