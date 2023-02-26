@@ -19,11 +19,11 @@ public final class CustomJoinMessages extends JavaPlugin {
         Metrics metrics = new Metrics(this, 17818);
 
         fileConfiguration.addDefault("SendJoinMessage", true);
-        fileConfiguration.addDefault("CustomJoinMessage", "%player% joined");
+        fileConfiguration.addDefault("CustomJoinMessage", "&8[&6+&8] &7%player% joined! &8(%playercount%)");
         fileConfiguration.addDefault("SendQuitMessage", true);
-        fileConfiguration.addDefault("CustomQuitMessage", "%player% left");
+        fileConfiguration.addDefault("CustomQuitMessage", "&8[&4-&8] &7%player% left! &8(%playercount%)");
         fileConfiguration.addDefault("SendFirstJoinMessage", true);
-        fileConfiguration.addDefault("CustomFirstJoinMessage", "%player% is new on this server!");
+        fileConfiguration.addDefault("CustomFirstJoinMessage", "&8[&6b+&8] &7%player% is new here! &8(%playercount%)");
 
         fileConfiguration.options().copyDefaults(true);
 
