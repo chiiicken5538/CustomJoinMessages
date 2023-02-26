@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.Objects;
 
 public class PlayerQuitListener implements Listener {
 
@@ -23,11 +22,13 @@ public class PlayerQuitListener implements Listener {
                 exception.printStackTrace();
             }
 
-            event.setQuitMessage(Objects.requireNonNull(quitMessage)
-                    .replace("&", "§")
-                    .replace("%player%", player.getName())
-                    .replace("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size() - 1))
-            );
+            if (quitMessage != null) {
+                event.setQuitMessage(quitMessage
+                        .replace("&", "§")
+                        .replace("%player%", player.getName())
+                        .replace("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size() - 1))
+                );
+            }
 
         } else {
             event.setQuitMessage(null);

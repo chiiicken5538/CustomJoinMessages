@@ -7,36 +7,46 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.Objects;
-
 public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+
+
         if(CustomJoinMessages.plugin.fileConfiguration.getBoolean("SendFirstJoinMessage")) {
+            String firstJoinMessage = "failed to load";
             try {
-                event.setJoinMessage(Objects.requireNonNull(CustomJoinMessages.plugin.fileConfiguration.getString("CustomFirstJoinMessage"))
+                firstJoinMessage = CustomJoinMessages.plugin.fileConfiguration.getString("CustomFirstJoinMessage");
+            } catch (NullPointerException exception) {
+                exception.printStackTrace();
+            }
+
+            if (firstJoinMessage != null) {
+                event.setJoinMessage(firstJoinMessage
                         .replace("&", "§")
                         .replace("%player%", player.getName())
                         .replace("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size()))
                 );
-            } catch (NullPointerException exception) {
-                // Couldn't replace placeholders
             }
 
         }
 
         if(CustomJoinMessages.plugin.fileConfiguration.getBoolean("SendJoinMessage")) {
+            String joinMessage = "failed to load!";
             try {
-                event.setJoinMessage(Objects.requireNonNull(CustomJoinMessages.plugin.fileConfiguration.getString("CustomJoinMessage"))
+                joinMessage = CustomJoinMessages.plugin.fileConfiguration.getString("CustomJoinMessage");
+            } catch (NullPointerException exception) {
+                exception.printStackTrace();
+            }
+
+            if (joinMessage != null) {
+                event.setJoinMessage(joinMessage
                         .replace("&", "§")
                         .replace("%player%", player.getName())
                         .replace("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size()))
-                );
-            } catch (NullPointerException exception) {
-                // Couldn't replace placeholders
+                    );
             }
 
         } else {
