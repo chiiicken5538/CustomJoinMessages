@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.Objects;
+
 public class PlayerQuitListener implements Listener {
 
     @EventHandler
@@ -14,11 +16,19 @@ public class PlayerQuitListener implements Listener {
         Player player = event.getPlayer();
 
         if(CustomJoinMessages.plugin.fileConfiguration.getBoolean("SendQuitMessage")) {
-            event.setQuitMessage(CustomJoinMessages.plugin.fileConfiguration.getString("CustomQuitMessage")
-                    .replaceAll("&", "§")
-                    .replaceAll("%player%", player.getName())
-                    .replaceAll("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size() - 1))
+            String quitMessage = "failed to load";
+            try {
+                quitMessage = CustomJoinMessages.plugin.fileConfiguration.getString("CustomQuitMessage");
+            } catch (NullPointerException exception) {
+                exception.printStackTrace();
+            }
+
+            event.setQuitMessage(Objects.requireNonNull(quitMessage)
+                    .replace("&", "§")
+                    .replace("%player%", player.getName())
+                    .replace("%playercount%", String.valueOf(Bukkit.getOnlinePlayers().size() - 1))
             );
+
         } else {
             event.setQuitMessage(null);
         }
@@ -26,4 +36,4 @@ public class PlayerQuitListener implements Listener {
     }
 }
 
-// hi
+// hi aa
